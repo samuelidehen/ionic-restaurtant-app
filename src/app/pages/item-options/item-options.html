@@ -1,0 +1,121 @@
+<ion-header *ngIf="item">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/restaurants"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{item.name_en}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="item" class="ion-padding restaurant-detail">
+<ion-card>
+  <ion-item><img style="height:100px;width:100%" src="assets/img/fooditem.jpg" alt="Section Image"></ion-item>
+  <div class="section-title"></div>
+    <span class="item-name">{{item.description_en}}</span>
+    <ion-card-content *ngFor= "let option of item.options">
+      <ion-item-group *ngIf = "option.parent_option_id < 1">
+              <ion-item-divider>
+                <ion-label>{{labels[option.label_id].en}} <span *ngIf= "option.max_count > 1">  : max {{option.max_count}} choices</span></ion-label>
+              </ion-item-divider>
+
+              <ion-select *ngIf=" option.type == 'select'" placeholder = "Select an option" [(ngModel)] = "isSelected" (ionChange)="toShow(option,isSelected)">
+                <ion-select-option *ngFor= "let value of option.values" value = {{value.label_id}} >
+                {{labels[value.label_id].en}}
+                  </ion-select-option>
+              </ion-select>
+
+              <ion-radio-group *ngIf= "option.type == 'radio'" allow-empty-selection (ionChange)="ItemSelect(option)">
+                <ion-item *ngFor= "let value of option.values" >
+                  <ion-item *ngIf="value.label_id.length < 5">
+                    <div>{{labels[value.label_id].en}}</div><span class="item-price">{{value.price_prefix}}{{value.price}}</span>
+                  <ion-radio slot="start" color="primary" value="{{labels[value.label_id].en}}" checked></ion-radio>
+                  </ion-item>
+                  </ion-item>
+              </ion-radio-group>
+
+
+              <ion-item class="item-card" *ngIf="option.type == 'checkbox'" (ionChange)="ItemSelect(option)">
+              <div *ngFor= "let value of option.values" >
+                <ion-item class="item-name" *ngIf="extra != ' '&& value.option_id == checkboxOptionId">{{extra}}</ion-item>
+                <div *ngFor="let c of convertStringtoArray(value.label_id)">
+                  <span class="item-name">
+                  <ion-icon class="multiSelect"  slot="start" (click)="checkBoxShow(option.max_count,labels[c].en,value.option_id)" name="add-circle" color="warning" ></ion-icon>
+                  {{labels[c].en }}</span>
+                  <span class="item-price">{{value.price_prefix}}{{value.price}}</span>
+             </div>
+            </div>
+          </ion-item>
+
+
+            <div *ngIf="option.type== 'multiselect'" (ionChange)="ItemSelect(option)">
+            <ion-item   *ngFor= "let value of option.values" >
+              <ion-checkbox slot="start" color="primary" [(ngModel)]="value.isChecked"></ion-checkbox>
+                <ion-label>{{labels[value.label_id].en}}<span class="item-price">{{value.price_prefix}}{{value.price}}</span></ion-label>
+            </ion-item>
+          </div>
+            </ion-item-group>
+
+
+            <!---------------------------------- For Children  ------------------------------------------>
+
+            <ion-item-group *ngIf = "option.parent_option_id > 1 && valueSelected && option.parent_option_id == selectedOption_id">
+              <ion-item-divider>
+                <ion-label>{{labels[option.label_id].en}} <span *ngIf= "option.max_count > 1">  : max {{option.max_count}} choices</span></ion-label>
+              </ion-item-divider>
+
+
+              <ion-select *ngIf=" option.type == 'select'" placeholder = "Select an option" [(ngModel)] = "isSelected" (ionChange)="toShow(option.values,isSelected)">
+                <ion-select-option *ngFor= "let value of option.values" value = {{value.label_id}} >
+                {{labels[value.label_id].en}}
+                  </ion-select-option>
+              </ion-select>
+
+              <div *ngFor="let value of option.values">
+              <ion-item *ngIf= "value.parent_value_id == valueSelected">
+                <div class="item-card" *ngIf="value.label_id.length > 5 ">
+                 <ion-item class="item-name" *ngIf="extra != ' '">{{extra}}</ion-item>
+                    <div *ngFor="let c of convertStringtoArray(value.label_id)"> <span class="item-name"> <ion-icon class="multiSelect"  (click)="newCount(value.price,labels[c].en)" name="add-circle" color="warning" ></ion-icon> {{labels[c].en }}</span>
+                      <span class="item-price">{{value.price_prefix}}{{value.price}}</span>
+                    </div>
+                  </div>
+             </ion-item>
+             </div>
+
+
+            <ion-radio-group *ngIf= "option.type == 'radio' && valueSelected"   allow-empty-selection>
+              <div *ngFor= "let value of option.values" >
+                <ion-item *ngIf="value.label_id.length < 5 && value.parent_value_id == valueSelected">
+                  <div>{{labels[value.label_id].en}}</div><span class="item-price">{{value.price_prefix}}{{value.price}}</span>
+                <ion-radio slot="start" color="primary" value="{{labels[value.label_id].en}}" checked></ion-radio>
+                </ion-item>
+              </div>
+            </ion-radio-group>
+
+
+
+            <div *ngIf="option.type== 'multiselect'">
+              <ion-item   *ngFor= "let value of option.values" >
+                <ion-checkbox slot="start" color="primary" [(ngModel)]="value.isChecked"></ion-checkbox>
+                  <ion-label>{{labels[value.label_id].en}}<span class="item-price">{{value.price_prefix}}{{value.price}}</span></ion-label>
+              </ion-item>
+            </div>
+
+
+            </ion-item-group>
+
+
+
+    </ion-card-content>
+
+</ion-card>
+
+<ion-button style="margin:20px;" color='secondary'(click)="addToCart(item.base_price,item.name_en)" expand="full" [routerLink] ="['/app/tabs/restaurants/cart-details']">Add to Cart ${{ total | number:'1.1-3'}}</ion-button>
+
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+
+  <ion-fab-button [routerLink] ="['/app/tabs/restaurants/cart-details']"><ion-icon name="cart"></ion-icon> </ion-fab-button>
+</ion-fab>
+
+</ion-content>
+

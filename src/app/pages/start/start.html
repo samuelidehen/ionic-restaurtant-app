@@ -1,0 +1,35 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen color='dark'>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+    <ion-slide>
+      <img src="assets/img/image1.png" class="slide-image" />
+      <h2 class="slide-title" color='secondary'>
+        RESTOMENU
+      </h2>
+
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/image2.png" class="slide-image" />
+      <h2 class="slide-title">ORDER</h2>
+
+    </ion-slide>
+
+
+    <ion-slide>
+      <img src="assets/img/image3.png" class="slide-image" />
+      <h2 class="slide-title">Get access to delicious food now</h2>
+      <ion-button fill="clear" (click)="startApp()">
+        Continue
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

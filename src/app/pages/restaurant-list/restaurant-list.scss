@@ -1,0 +1,23 @@
+.scroll {
+  background: #ededed;
+}
+
+.restaurant-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-card ion-card-header {
+  padding: 0;
+}
+
+.restaurant-card ion-card-header .item {
+  padding: 4px 16px;
+}
+
+.restaurant-card ion-card-content {
+  flex: 1 1 auto;
+
+  padding: 0;
+}

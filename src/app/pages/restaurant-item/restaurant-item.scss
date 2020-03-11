@@ -1,0 +1,45 @@
+.restaurant-detail img {
+  max-width: 140px;
+  border-radius: 50%;
+}
+
+.restaurant-detail p {
+  color: #60646b;
+}
+
+.restaurant-header{
+  background: -webkit-linear-gradient(-50deg, rgb(151, 199, 148), rgb(18, 101, 108));
+  color:white;
+}
+
+.item-title{
+border: 0.5px solid #ccc;
+clear:both !important;
+line-height: 24px;
+letter-spacing: .1px;
+color: rgba(0,0,0,.87);
+
+}
+.section-title{
+background: #34495E;
+font-weight: 700;
+font-size: 20px;
+color: white;
+text-align: center;
+line-height: 2;
+
+}
+.item-name{
+  float:left;
+  padding :15px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.item-price{
+  float:right;
+ letter-spacing: .1px;
+ padding :15px;
+ font-weight: 700;
+font-size: 18px;
+
+}

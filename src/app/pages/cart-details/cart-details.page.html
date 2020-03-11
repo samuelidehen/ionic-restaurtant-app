@@ -1,0 +1,17 @@
+
+<ion-header>
+    <ion-toolbar >
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/app/tabs/restaurants/restaurant-details/:slug"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Cart Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+<ion-item color="primary">{{itemName}}</ion-item>
+<ion-item>  {{selectionCount}}</ion-item>
+ <ion-item> {{extraName}}</ion-item>
+ <ion-item>${{itemPrice | number:'1.1-3'}}</ion-item>
+
+</ion-content>

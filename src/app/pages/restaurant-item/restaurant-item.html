@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/restaurants"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ITEM</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding restaurant-detail">
+<ion-card>
+  <ion-item><img style="height:100px;width:100%" src="assets/img/fooditem.jpg" alt="Section Image"></ion-item>
+  <div class="section-title"></div>
+    <span class="item-name">Item-name</span><span class="item-price">Item-price</span>
+</ion-card>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+  <ion-fab-button><ion-icon name="cart"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>

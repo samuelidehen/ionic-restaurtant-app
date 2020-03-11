@@ -1,0 +1,40 @@
+
+.section-title{
+background: #34495E;
+font-weight: 700;
+font-size: 20px;
+color: white;
+text-align: center;
+line-height: 2;
+
+}
+.item-name{
+  float:left;
+  padding :15px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.multiSelect:hover{
+  background: black;
+
+}
+.item-name{
+  float:left;
+  padding :10px;
+  font-weight: 700;
+  font-size: 13px;
+  padding-left:-5px;
+  color: rgb(38, 100, 119);
+}
+
+.item-price{
+float:right;
+ letter-spacing: .1px;
+ padding :10px;
+ font-weight: 700;
+font-size: 14px;
+margin-right: -2px;
+color:black;
+
+}

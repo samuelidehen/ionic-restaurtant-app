@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/restaurants"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{restaurant?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding restaurant-detail">
+  <div *ngIf="restaurant" class="ion-text-center">
+    <img src="https://cdn.restomenu.com/web/img/place/{{restaurant?.place_id}}/{{restaurant?.logo}}" onerror="this.src='assets/img/image.png'" [alt]="restaurant.name">
+    <br>
+
+  </div>
+  <div class="restaurant-header">MENU</div>
+<ion-card *ngFor="let section of menus?.data" >
+  <div><img class="sction-image" src="https://cdn.restomenu.com/web/img/section/{{section?.section_id}}/{{section?.img}}" onerror="this.src='assets/img/section.jpeg'" alt="Section Image"></div>
+  <div class="section-title">{{section.name_en}}</div>
+  <div *ngFor="let item of section.items" class="item-title">
+    <span class="item-name" (click)="SelectedSection(section.section_id,item.item_id)" [routerLink] ="['/app/tabs/restaurants/restaurant-details',restaurant.slug,item.item_id]">{{item?.name_en}}</span><span class="item-price">${{item?.base_price}}</span>
+  </div>
+
+
+</ion-card>
+
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button><ion-icon name="cart"></ion-icon></ion-fab-button>
+  </ion-fab>
+
+</ion-content>

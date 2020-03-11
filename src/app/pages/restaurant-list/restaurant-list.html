@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Restaurants</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-stretch">
+        <ion-col size="12" size-md="6" *ngFor="let restaurant of restaurants">
+          <ion-card class="restaurant-card">
+            <ion-card-header>
+
+              <ion-item detail="false" lines="none" routerLink="/app/tabs/restaurants/restaurant-details/{{restaurant.slug}}" >
+
+
+              <img style="height:120px;width:120px" src="https://cdn.restomenu.com/web/img/place/{{restaurant?.place_id}}/{{restaurant?.logo}}" onerror="this.src='assets/img/image.png'" alt="Restaurant profile pic">
+              </ion-item>
+              <ion-item>
+                <ion-card-title class="ion-text-left">
+                <h3 >{{restaurant.name}}</h3>
+              </ion-card-title>
+              </ion-item>
+
+            </ion-card-header>
+
+           <ion-card-header>
+
+           </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let session of restaurant.sessions" routerLink="/app/tabs/restaurants/session/{{session.id}}">
+                  <h3>{{session.name}}</h3>
+                </ion-item>
+
+                <ion-item >
+                  <h3>{{restaurant.city}}, {{restaurant.postal_code}}</h3>
+                </ion-item>
+
+
+                <ion-item>
+                  <h3>{{restaurant.phone}}</h3>
+                </ion-item>
+
+                <ion-item routerLink="/app/tabs/restaurants/restaurant-details/{{restaurant.slug}}">
+                  <ion-button  [color]="restaurant.hours.now == 'CLOSED'? 'danger' : 'success' ">{{restaurant.hours.now}}</ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+
+
+            <ion-row style="margin-top:-25px" class="ion-no-padding ion-justify-content-center">
+              <ion-col size="4" class="ion-text-left">
+                <ion-button fill="clear" size="small" color="primary" style="font-size: 10px;"(click)="goToRestaurantTwitter(restaurant)">
+                  <ion-icon name="logo-twitter" slot="start"></ion-icon>
+                  Tweet
+                </ion-button>
+
+              </ion-col>
+              <ion-col size="4" class="ion-text-center">
+                <ion-button fill="clear" size="small" color="primary"  style="font-size: 10px;" (click)="openRestaurantShare(restaurant)">
+                  <ion-icon name="share-alt" slot="start"></ion-icon>
+                  Share
+                </ion-button>
+
+              </ion-col>
+              <ion-col size="4" lass="ion-text-right">
+                <ion-button fill="clear" size="small" color="primary"  style="font-size: 10px;" (click)="openContact(restaurant)">
+                  <ion-icon name="chatboxes" slot="start"></ion-icon>
+                  Contact
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

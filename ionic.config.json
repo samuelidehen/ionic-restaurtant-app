@@ -1,0 +1,7 @@
+{
+  "name": "ionic-restomenu-app",
+  "type": "angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
